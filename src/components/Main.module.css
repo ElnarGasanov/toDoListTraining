@@ -1,0 +1,23 @@
+.main{
+    max-width: 300px;
+    margin: auto;
+}
+.wrapperTextEnter{
+    display: flex;
+    border: crimson 10px solid;
+}
+.wrapperTextEnter textarea{
+    width: 350px;
+    height: 40px;
+    resize: none;
+    font-size: 30px;
+}
+.wrapperTextEnter button{
+    padding: 0 20px 0 20px;
+}
+.items{
+    display: flex;
+    justify-content: space-evenly;
+    padding: 20px;
+    border: 1px solid;
+}
