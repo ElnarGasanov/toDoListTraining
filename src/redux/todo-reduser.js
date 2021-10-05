@@ -1,14 +1,14 @@
 
-let newID = Math.random().toString(36).substr(2, 9)
 let initialState = {
     task: [
-        {Id: newID, taskText: "yo"},
-        {Id: newID, taskText: "ae"},
-        {Id: newID, taskText: "OG"},
-        {Id: newID, taskText: "hi"},
-        {Id: newID, taskText: "privet"},
+        {id: 1, taskText: "yo"},
+        {id: 2, taskText: "ae"},
+        {id: 3, taskText: "OG"},
+        {id: 4, taskText: "hi"},
+        {id: 5, taskText: "privet"},
     ],
     newTaskText: "alo",
+    isStyle: false,
 };
 
 export const todo_reducer = (state = initialState, action) => {
@@ -17,15 +17,19 @@ export const todo_reducer = (state = initialState, action) => {
             let newTask = state.newTaskText;
             return {
                 ...state,
-                task: [...state.task, {id: newID, taskText: newTask}],
+                task: [...state.task, {id: 6, taskText: newTask}],
                 newTaskText: "",
             }
         case "UPDATE-NEW-TASK-TEXT":
             return { ...state, newTaskText: action.Text, }
         case "DELETE-TASK-ELEMENT" :
-            return state.filter(item => item.Id !== action.id);
-        case "DONE-BUTTON" :
-            return false;
+            let filteredItems = state.task.filter(item => item.id !== action.id)
+            return {
+                ...state,
+                task: filteredItems,
+            };
+        case "TOGGLE_IS_STYLE":
+            return { ...state, isStyle: action.isStyle, id: action.id }
         default: return state;
     }
 }
@@ -40,15 +44,8 @@ export const updateTaskAC = (text) => {
         type: "UPDATE-NEW-TASK-TEXT", Text: text
     }
 };
-export const handleRemoveAC = (id) => {
-    return {
-        type: "DELETE-TASK-ELEMENT", id
-    }
-}
-export const handleDoneAC = () => {
-    return {
-        type: "DONE-BUTTON",
-    }
-}
+export const handleRemoveAC = (id) => {return {type: "DELETE-TASK-ELEMENT", id}}
+
+export const toggleIsStyle = (isStyle, id) => ({ type:"TOGGLE_IS_STYLE", isStyle, id });
 
 export default todo_reducer;
