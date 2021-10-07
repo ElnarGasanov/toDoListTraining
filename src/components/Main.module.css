@@ -2,6 +2,13 @@
     max-width: 300px;
     margin: auto;
 }
+.main main {
+    display: flex;
+    justify-content: space-around;
+}
+.main main h2 {
+    width: 350px;
+}
 .wrapperTextEnter{
     display: flex;
     border: crimson 10px solid;
@@ -17,11 +24,24 @@
 }
 .items{
     display: flex;
-    justify-content: space-evenly;
+    width: 350px;
+    justify-content: space-between;
     padding: 20px;
     border: 1px solid;
+    margin: 10px;
 }
-
-.items .styleFromButtonDone{
+.items button img{
+    width: 20px;
+}
+.styleFromButtonDone{
     background: green;
+    width: 350px;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    border: 1px solid;
+    margin: 10px;
+}
+.styleFromButtonDone button img{
+    width: 20px;
 }

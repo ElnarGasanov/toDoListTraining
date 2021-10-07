@@ -1,20 +1,43 @@
 import React from "react";
 import style from "./Main.module.css"
+import success from "./../image/free-png.ru-3-700x700.png"
+import remove from "./../image/remove.png"
+
 
 const Main = (props) => {
-    let taskElements =
-        props.todo_reducer.task.map((e) =>
 
-            <div key={e.id} id={e.id} className={style.items}>
+    let taskElements =
+        props.tasksArr.map((e) =>
+            (e.completed === false ? <div id={e.id} className={style.items}>
                 <span>{e.taskText}</span>
                 <div>
-                    <button onClick={() => addStyle()}
-                            className={props.isStyle === true
-                                ? style.styleFromButtonDone : null}
-                    >выполнено</button>
-                    <button onClick={() => onRemove()}>удалить</button>
+                    <button onClick={()=> addStyle(e.id)}>
+                        <img src={success}/>
+                    </button>
+                    <button onClick={() => onRemove(e.id)}>
+                        <img src={remove}/>
+                    </button>
                 </div>
-            </div>);
+            </div> : null)
+            );
+
+    let taskElementsDone =
+        props.tasksArr.map((e) =>
+            (e.completed === true ? <div id={e.id} className={e.completed === true ? style.styleFromButtonDone : style.items}>
+                <span>{e.taskText}</span>
+                <div>
+                    <button onClick={()=> addStyle(e.id)}>
+                        <img src={success}/>
+                    </button>
+                    <button onClick={() => onRemove(e.id)}>
+                        <img src={remove}/>
+                    </button>
+                </div>
+            </div> : null)
+        );
+
+
+
     let addTask = () => {
         props.addTaskAC();
     }
@@ -28,9 +51,10 @@ const Main = (props) => {
         props.handleRemoveAC(id);
     }
 
-    let addStyle = (isStyle) => {
-        props.toggleIsStyle(true)
+    let addStyle = (id) => {
+        props.toggleIsStyle(id);
     }
+
 
     return (
         <div className={style.main}>
@@ -41,8 +65,16 @@ const Main = (props) => {
                           value={props.newTaskText}/>
                 <button onClick={addTask}>+</button>
             </div>
-            <h2>tasks for the day:</h2>
-            {taskElements}
+            <main>
+                <div>
+                    <h2>Задания на день:</h2>
+                    {taskElements}
+                </div>
+                <div>
+                    <h2>Выполненые задания:</h2>
+                    {taskElementsDone}
+                </div>
+            </main>
         </div>
     )
 }

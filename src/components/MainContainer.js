@@ -7,9 +7,8 @@ import Main from "./Main";
 
 const mapStateToProps = (state) => {
     return {
-        todo_reducer: state.todo_reducer,
-        newTaskText: state.todo_reducer.newTaskText,
-        isStyle: state.todo_reducer.isStyle,
+        tasksArr: state.todoPage.task,
+        newTaskText: state.todoPage.newTaskText,
     }
 }
 
